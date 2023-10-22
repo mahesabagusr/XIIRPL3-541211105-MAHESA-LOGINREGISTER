@@ -1,0 +1,8 @@
+      <View styles={styles.container}>
+        <View style={styles.logoContainer}>
+          <Image style={styles.logoImg} source={require('../../assets/img/logo.png')} />
+        </View>
+        <View styles={styles.textContainer}>
+          <Text styles={styles.heading1}>tes</Text>
+        </View>
+      </View>
