@@ -1,19 +1,23 @@
 import { Text, View, SafeAreaView, StyleSheet, Image, Button, Alert, TouchableOpacity, ScrollView, TextInput, Pressable } from 'react-native';
 import React, { useState } from 'react';
+import Icon from 'react-native-vector-icons/AntDesign';
 
-export default function Login({ navigation }) {
+export default function Register({ navigation }) {
+  const [nama, changeName] = React.useState('');
   const [username, changeUsername] = React.useState('');
   const [password, changePassword] = React.useState('');
+  const [conpassword, changeconpassword] = React.useState('');
 
   return (
     <ScrollView>
+
       <View style={styles.container}>
         <View style={styles.logoContainer}>
           <Image style={styles.logoImg} source={require('../../assets/img/logo.png')} />
         </View>
         <View style={styles.textContainer}>
-          <Text style={styles.heading2}>Hello,</Text>
-          <Text style={styles.subheading3}>Masuk untuk melanjutkan yahh</Text>
+          <Text style={styles.heading2}>Selamat Datang</Text>
+          <Text style={styles.subheading3}>Daftar untuk melanjutkan yahh</Text>
         </View>
 
         <View style={{ flex: 1 }}>
@@ -21,12 +25,26 @@ export default function Login({ navigation }) {
             <View style={styles.formContainer}></View>
             <TextInput
               style={styles.input}
-              onChangeText={changeUsername}
-              value={username}
-              placeholder="Username"
+              onChangeText={changeName}
+              value={nama}
+              placeholder="Nama Lengkap"
             />
           </View>
           <View style={styles.formContainer}>
+            <TextInput
+              style={styles.input}
+              onChangeText={changeUsername}
+              value={username}
+              placeholder="Username/Email"
+            />
+          </View>
+          <View style={styles.formContainer}>
+            <Icon
+              name='eye'
+              size={20}
+              color='grey'
+              style={{ position: 'absolute', alignSelf: 'flex-end', paddingEnd: 15 }}
+            />
             <TextInput
               style={styles.input}
               onChangeText={changePassword}
@@ -34,38 +52,38 @@ export default function Login({ navigation }) {
               placeholder="Password"
             />
           </View>
-          <Text style={{ fontWeight: 'light', color: 'grey', marginTop: 10, alignSelf: 'flex-end' }}>Lupa Password?</Text>
+          <View style={styles.formContainer}>
+            <Icon
+              name='eye'
+              size={20}
+              color='grey'
+              style={{ position: 'absolute', alignSelf: 'flex-end', paddingEnd: 15 }}
+            />
+            <TextInput
+              style={styles.input}
+              onChangeText={changeconpassword}
+              value={conpassword}
+              placeholder="Ulang Password"
+            />
+          </View>
         </View>
 
         <View style={{ flex: 1 }}>
           <TouchableOpacity style={styles.loginButton}>
-            <Text style={{ fontSize: 16, fontWeight: 500, color: 'white' }}>Masuk</Text>
+            <Text style={{ fontSize: 16, fontWeight: 500, color: 'white' }}>Daftar</Text>
           </TouchableOpacity>
 
-          <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 32 }}>
-            <View style={{ flex: 1, height: 1, backgroundColor: 'grey' }} />
-            <View>
-              <Text style={{ width: 50, textAlign: 'center', color: 'grey' }}>Atau</Text>
-            </View>
-            <View style={{ flex: 1, height: 1, backgroundColor: 'grey' }} />
+          <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: 16, }}>
+            <Text style={{ fontSize: 13, paddingRight: 2 }}>Sudah punya akun?</Text>
+            <TouchableOpacity
+              onPress={() => { navigation.navigate('Login') }}>
+              <Text style={{ fontSize: 14, fontWeight: 600, color: '#638CCE' }}>Masuk</Text>
+            </TouchableOpacity>
           </View>
 
-          <TouchableOpacity style={styles.registerButton}>
-            <Text style={{ fontSize: 16, fontWeight: 500, color: 'black' }}>Google</Text>
-          </TouchableOpacity>
         </View>
-
-        <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: 16, }}>
-          <Text style={{ fontSize: 13, paddingRight: 2 }}>Belum Punya Akun?</Text>
-          {/* <Text style={{ fontSize: 14, fontWeight: 600, color: '#638CCE' }}>Daftar sekarang</Text> */}
-          <TouchableOpacity
-          onPress={()=>{navigation.navigate('Register')}}>
-            <Text style={{ fontSize: 14, fontWeight: 600, color: '#638CCE' }}>Daftar sekarang</Text>
-          </TouchableOpacity>
-
-        </View>
-
       </View>
+
     </ScrollView >
   )
 }
@@ -84,13 +102,10 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     justifyContent: 'center'
   },
-  textContainer: {
-    marginTop: 24,
-    marginBottom: 12,
-  },
   formContainer: {
     flex: 1,
     marginTop: 16,
+    justifyContent: 'center'
   },
   input: {
     height: 60,
@@ -99,13 +114,8 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     paddingLeft: 30,
     borderColor: 'grey',
-  },
-  logoImg: {
-    height: 50,
-    width: 50,
-    resizeMode: 'contain',
-    alignSelf: 'center',
-    justifyContent: 'center'
+    // flexDirection: 'row',
+    // justifyContent: 'space-between',
   },
   loginButton: {
     alignItems: 'center',
@@ -115,24 +125,18 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     elevation: 3,
     backgroundColor: '#3B95FF',
-    marginTop: 32,
+    marginTop: 64,
   },
-  registerButton: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingVertical: 16,
-    paddingHorizontal: 32,
-    borderRadius: 10,
-    backgroundColor: '#F4F9FF',
-    marginTop: 32,
-    borderWidth: 0.5,
-    borderColor: 'grey',
+  logoImg: {
+    height: 50,
+    width: 50,
+    resizeMode: 'contain',
+    alignSelf: 'center',
+    justifyContent: 'center'
   },
-  heading1: {
-    color: 'black',
-    fontWeight: 'bold',
-    justifyContent: 'center',
-    fontSize: 32,
+  textContainer: {
+    marginTop: 24,
+    marginBottom: 12,
   },
   heading2: {
     color: 'black',
@@ -146,5 +150,4 @@ const styles = StyleSheet.create({
     fontSize: 14,
     marginTop: 10
   },
-
 })
